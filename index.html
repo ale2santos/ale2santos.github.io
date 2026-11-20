@@ -74,6 +74,15 @@
   .depo p { margin: 0 0 10px; }
   .grupo { margin: 28px 0 14px; color: var(--suave); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
   .depo .autor { color: var(--suave); font-size: 0.95rem; margin: 0; }
+  html { scroll-behavior: smooth; }
+  section { scroll-margin-top: 56px; }
+  .menu { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--linha); backdrop-filter: blur(6px); }
+  .menu .container { display: flex; gap: 6px; overflow-x: auto; white-space: nowrap; padding-top: 10px; padding-bottom: 10px; }
+  .menu a { color: var(--texto); text-decoration: none; font-size: .95rem; padding: 6px 10px; border-radius: 6px; }
+  .menu a:hover { background: var(--fundo-alt); }
+  .menu a.destaque { background: var(--destaque); color: #fff; font-weight: 600; }
+  .links a.mentoria { background: var(--destaque); border-color: var(--destaque); color: #fff; }
+  .links a.mentoria:hover { opacity: .9; color: #fff; }
   .andamento li { color: var(--suave); }
   .topo { display: flex; gap: 32px; align-items: center; }
   .foto-perfil {
@@ -112,10 +121,22 @@
       <a href="https://github.com/ale2santos" target="_blank" rel="noopener">GitHub</a>
       <a href="https://www.instagram.com/ale2_santos" target="_blank" rel="noopener">Instagram</a>
       <a href="mailto:alexandres2santo@gmail.com">E-mail</a>
+      <a class="mentoria" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1ZeJGSFFk-KOE0UkChHrOO2JXzz26yu0qhc0UKugidFkDoZ_tRhTZSrGatvT0iAMGbZDpboMKP" target="_blank" rel="noopener">Agendar mentoria</a>
     </div>
     </div>
   </div>
 </header>
+
+<nav class="menu" aria-label="Seções">
+  <div class="container">
+    <a class="destaque" href="#mentoria">Mentoria</a>
+    <a href="#trajetoria">Trajetória</a>
+    <a href="#experiencia">Experiência</a>
+    <a href="#recomendacoes">Recomendações</a>
+    <a href="#palestras">Palestras</a>
+    <a href="#formacao">Formação</a>
+  </div>
+</nav>
 
 <section id="trajetoria">
   <div class="container">
