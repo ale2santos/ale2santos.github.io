@@ -76,13 +76,6 @@
   .depo .autor { color: var(--suave); font-size: 0.95rem; margin: 0; }
   html { scroll-behavior: smooth; }
   section { scroll-margin-top: 56px; }
-  .menu { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--linha); backdrop-filter: blur(6px); }
-  .menu .container { display: flex; justify-content: center; gap: 2px; overflow-x: auto; white-space: nowrap; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; }
-  .menu .container::-webkit-scrollbar { display: none; }
-  @media (max-width: 760px) { .menu .container { justify-content: flex-start; } }
-  .menu a { color: var(--texto); text-decoration: none; font-size: .9rem; padding: 6px 9px; border-radius: 6px; }
-  .menu a:hover { background: var(--fundo-alt); }
-  .menu a.destaque { background: var(--destaque); color: #fff; font-weight: 600; }
   .links a.mentoria { background: var(--destaque); border-color: var(--destaque); color: #fff; }
   .links a.mentoria:hover { opacity: .9; color: #fff; }
   .roteiro { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
@@ -134,17 +127,6 @@
   </div>
 </header>
 
-<nav class="menu" aria-label="Seções">
-  <div class="container">
-    <a href="#trajetoria">Trajetória</a>
-    <a href="#experiencia">Experiência</a>
-    <a href="#recomendacoes">Recomendações</a>
-    <a href="#palestras">Palestras</a>
-    <a href="#formacao">Formação</a>
-    <a href="#andamento">Projetos</a>
-    <a href="#mentoria">Mentoria</a>
-  </div>
-</nav>
 
 <section id="trajetoria">
   <div class="container">
