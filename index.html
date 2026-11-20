@@ -155,6 +155,25 @@
     html { scroll-behavior: auto; }
     .faixa span { animation: none; }
   }
+
+  /* Contato */
+  .form-contato { display: grid; gap: 14px; max-width: 560px; }
+  .form-contato label { display: grid; gap: 6px; font-weight: 500; font-size: .95rem; }
+  .form-contato input, .form-contato textarea {
+    font: inherit; padding: 10px 12px; border: 1px solid var(--linha); border-radius: 6px; background: var(--branco); color: var(--tinta);
+  }
+  .form-contato input:focus-visible, .form-contato textarea:focus-visible { outline: 3px solid var(--sinal); outline-offset: 1px; border-color: var(--sinal); }
+  .form-contato textarea { min-height: 140px; resize: vertical; }
+  .form-contato button {
+    justify-self: start; font: inherit; font-weight: 500; padding: 10px 18px; border-radius: 6px; cursor: pointer;
+    background: var(--tinta); color: #fff; border: 1px solid var(--tinta);
+  }
+  .form-contato button:hover { background: var(--sinal); border-color: var(--sinal); }
+  .form-contato button:disabled { opacity: .6; cursor: wait; }
+  .aviso-form { margin: 0; font-size: .95rem; }
+  .aviso-form.ok { color: var(--sinal); }
+  .aviso-form.erro { color: #a3261c; }
+  .oculto { position: absolute; left: -9999px; }
 </style>
 </head>
 <body>
@@ -506,6 +525,56 @@
     </div>
   </div>
 </section>
+
+<section id="contato">
+  <div class="container secao">
+    <h2>Contato</h2>
+    <div class="corpo">
+      <p>Quer falar sobre uma vaga, um projeto ou uma palestra? Mande uma mensagem que eu respondo por e-mail. Para mentoria, use o agendamento acima.</p>
+      <form class="form-contato" id="form-contato" action="https://formspree.io/f/xnpdbpjl" method="POST">
+        <label>Nome
+          <input type="text" name="nome" autocomplete="name" required>
+        </label>
+        <label>E-mail
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Mensagem
+          <textarea name="mensagem" required></textarea>
+        </label>
+        <input type="text" name="_gotcha" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_subject" value="Mensagem pelo portfólio">
+        <button type="submit">Enviar mensagem</button>
+        <p class="aviso-form" id="aviso-form" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('form-contato');
+    var aviso = document.getElementById('aviso-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var botao = form.querySelector('button');
+      botao.disabled = true;
+      aviso.className = 'aviso-form';
+      aviso.textContent = 'Enviando...';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.reset();
+          aviso.className = 'aviso-form ok';
+          aviso.textContent = 'Mensagem enviada. Obrigado! Eu respondo por e-mail.';
+        })
+        .catch(function () {
+          aviso.className = 'aviso-form erro';
+          aviso.textContent = 'Não foi possível enviar. Tente de novo ou escreva para alexandres2santo@gmail.com.';
+        })
+        .finally(function () { botao.disabled = false; });
+    });
+  })();
+</script>
 
 <footer>
   <div class="container">
