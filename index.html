@@ -83,6 +83,11 @@
   .menu a.destaque { background: var(--destaque); color: #fff; font-weight: 600; }
   .links a.mentoria { background: var(--destaque); border-color: var(--destaque); color: #fff; }
   .links a.mentoria:hover { opacity: .9; color: #fff; }
+  .roteiro { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .roteiro .card h3 { color: var(--destaque); margin-bottom: 8px; }
+  .roteiro .card ul { padding-left: 18px; color: var(--suave); }
+  .roteiro .card li { margin-bottom: 6px; }
+  .nota { color: var(--suave); font-size: .95rem; margin-top: 14px; }
   .andamento li { color: var(--suave); }
   .topo { display: flex; gap: 32px; align-items: center; }
   .foto-perfil {
@@ -129,12 +134,15 @@
 
 <nav class="menu" aria-label="Seções">
   <div class="container">
-    <a class="destaque" href="#mentoria">Mentoria</a>
     <a href="#trajetoria">Trajetória</a>
     <a href="#experiencia">Experiência</a>
     <a href="#recomendacoes">Recomendações</a>
     <a href="#palestras">Palestras</a>
     <a href="#formacao">Formação</a>
+    <a href="#andamento">Projetos</a>
+    <a href="#roteiro">Roteiro 2027</a>
+    <a href="#voluntariado">Voluntariado</a>
+    <a href="#mentoria">Mentoria</a>
   </div>
 </nav>
 
@@ -319,10 +327,64 @@
 
 <section id="andamento">
   <div class="container">
-    <h2>Em andamento</h2>
+    <h2>Projetos em andamento</h2>
+    <ul class="andamento">
+      <li><strong>Portfólio</strong> (esta página): publicado no GitHub Pages e atualizado aos poucos.</li>
+      <li><strong>Mentoria às quartas:</strong> conversas gratuitas sobre carreira, TI e liderança.</li>
+      <li><strong>Estudo para a ITIL Foundation (Version 5).</strong></li>
+    </ul>
+    <h3 style="margin-top:24px">Próximos (backlog)</h3>
     <ul class="andamento">
       <li>Kit do gestor de operações de TI: modelos práticos (1:1, postmortem, registro de mudança, relatório de SLA) e um script de cálculo de SLA.</li>
       <li>Laboratório de SRE: aplicação com pipeline, monitoramento, SLO, runbook e postmortem.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="roteiro">
+  <div class="container">
+    <h2>Roteiro 2027</h2>
+    <div class="roteiro">
+      <div class="card">
+        <h3>1º trimestre</h3>
+        <ul>
+          <li>Certificação ITIL Foundation (Version 5)</li>
+          <li>Mentorias gratuitas e coleta de depoimentos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2º trimestre</h3>
+        <ul>
+          <li>AWS Certified Cloud Practitioner</li>
+          <li>Kit do gestor de operações publicado no GitHub</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>3º trimestre</h3>
+        <ul>
+          <li>HashiCorp Terraform Associate</li>
+          <li>KCNA (Kubernetes)</li>
+          <li>Laboratório de SRE publicado no GitHub</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>4º trimestre</h3>
+        <ul>
+          <li>CKA (Kubernetes)</li>
+          <li>Novas propostas de palestra em eventos de tecnologia</li>
+        </ul>
+      </div>
+    </div>
+    <p class="nota">Durante todo o ano: estudo de inglês, palestras em comunidades e voluntariado. É um plano: as datas podem mudar conforme as oportunidades.</p>
+  </div>
+</section>
+
+<section id="voluntariado">
+  <div class="container">
+    <h2>Voluntariado</h2>
+    <ul class="andamento">
+      <li><strong>Defesa Civil:</strong> voluntário, com capacitação de voluntários em novembro de 2026.</li>
+      <li><strong>Aulas de informática:</strong> quero dar aulas como voluntário em uma instituição social. Se você conhece uma instituição que precise, me chama.</li>
     </ul>
   </div>
 </section>
