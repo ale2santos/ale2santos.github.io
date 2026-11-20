@@ -1,12 +1,265 @@
 <!DOCTYPE html>
-<html>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <body>
-    <h1 style="text-align:center;">Bem-vindo(as) a minha página!</h1>
-<p style="text-align:center;"> Olá, meu nome é Alexandre, teste pagina no GIHUB.</p>
-<center> <a href="https://github.com/ale2santos/ale2santos.githun.io" target="_blank" >
-            <img src="images/foto1.jpg">
-            </a>
-            </center>
-  </body>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandre dos Santos | Operações e Infraestrutura de TI</title>
+<meta name="description" content="Alexandre dos Santos: da bancada de montagem à coordenação de operações de TI. Gestão de incidentes, mudanças, SLA e cultura blameless.">
+<style>
+  :root {
+    --texto: #1f2328;
+    --suave: #57606a;
+    --fundo: #ffffff;
+    --fundo-alt: #f6f8fa;
+    --linha: #d0d7de;
+    --destaque: #b42318;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  .container { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 72px 0 48px; border-bottom: 1px solid var(--linha); }
+  h1 { font-size: 2.2rem; margin: 0 0 8px; line-height: 1.2; }
+  .cargo { font-size: 1.2rem; color: var(--destaque); font-weight: 600; margin: 0 0 20px; }
+  .resumo { font-size: 1.1rem; color: var(--suave); margin: 0 0 24px; max-width: 680px; }
+  .links a {
+    display: inline-block; margin: 0 10px 10px 0; padding: 8px 16px;
+    border: 1px solid var(--linha); border-radius: 6px;
+    color: var(--texto); text-decoration: none; font-weight: 500;
+  }
+  .links a:hover { border-color: var(--destaque); color: var(--destaque); }
+  section { padding: 48px 0; border-bottom: 1px solid var(--linha); }
+  section:nth-of-type(even) { background: var(--fundo-alt); }
+  h2 { font-size: 1.5rem; margin: 0 0 24px; }
+  h3 { font-size: 1.1rem; margin: 0 0 4px; }
+  .meta { color: var(--suave); font-size: 0.95rem; margin: 0 0 12px; }
+  ul { padding-left: 20px; margin: 0; }
+  li { margin-bottom: 8px; }
+  .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--fundo); border: 1px solid var(--linha);
+    border-radius: 8px; padding: 20px;
+  }
+  .card p { margin: 0; color: var(--suave); }
+  .trilha { list-style: none; padding: 0; margin: 0; border-left: 3px solid var(--linha); }
+  .trilha li { position: relative; padding: 0 0 20px 24px; margin: 0; }
+  .trilha li::before {
+    content: ""; position: absolute; left: -8px; top: 7px;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--fundo); border: 3px solid var(--destaque);
+  }
+  .trilha .ano { color: var(--suave); font-size: 0.95rem; }
+  .cargo-item { margin-bottom: 32px; }
+  .cargo-item:last-child { margin-bottom: 0; }
+  .palestra { margin-bottom: 28px; }
+  .palestra:last-child { margin-bottom: 0; }
+  blockquote {
+    margin: 24px 0 0; padding: 16px 20px;
+    border-left: 4px solid var(--destaque); background: var(--fundo);
+    font-style: italic; color: var(--suave);
+  }
+  .andamento li { color: var(--suave); }
+  .topo { display: flex; gap: 32px; align-items: center; }
+  .foto-perfil {
+    width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+    border: 4px solid var(--fundo-alt); flex-shrink: 0;
+  }
+  .fotos-palestra { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 8px; }
+  .fotos-palestra img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 8px; display: block; }
+  .legenda { color: var(--suave); font-size: 0.9rem; margin: 0 0 32px; }
+  @media (max-width: 600px) {
+    .topo { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .foto-perfil { width: 120px; height: 120px; }
+    .fotos-palestra { grid-template-columns: 1fr; }
+  }
+  footer { padding: 32px 0; color: var(--suave); font-size: 0.9rem; text-align: center; }
+  @media (max-width: 600px) {
+    header { padding: 48px 0 32px; }
+    h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container topo">
+    <img class="foto-perfil" src="images/foto-perfil.jpg" alt="Foto de Alexandre dos Santos">
+    <div>
+    <h1>Alexandre dos Santos</h1>
+    <p class="cargo">Operações e Infraestrutura de TI · Gestão de Equipes</p>
+    <p class="resumo">
+      Comecei na bancada, montando e testando computadores, e cheguei à coordenação de operações de TI.
+      Hoje busco unir operação estável, gestão de incidentes e mudanças, e times com autonomia para decidir.
+    </p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/santosale" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/ale2santos" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.instagram.com/ale2_santos" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:alexandres2santo@gmail.com">E-mail</a>
+    </div>
+    </div>
+  </div>
+</header>
+
+<section id="trajetoria">
+  <div class="container">
+    <h2>Trajetória</h2>
+    <ul class="trilha">
+      <li><strong>Técnico em Informática</strong> · MemoryShop<br><span class="ano">2009 a 2010</span></li>
+      <li><strong>Supervisor de Operações</strong> · Teledata<br><span class="ano">2010 a 2012</span></li>
+      <li><strong>Analista de Infraestrutura</strong> · Softplan<br><span class="ano">2012 a 2022</span></li>
+      <li><strong>Líder Técnico</strong> · Softplan<br><span class="ano">2022 a 2023</span></li>
+      <li><strong>Coordenador de Operações</strong> · Softplan<br><span class="ano">2023 a 2026</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="lideranca">
+  <div class="container">
+    <h2>Minha forma de liderar</h2>
+    <div class="grade">
+      <div class="card">
+        <h3>Autonomia com responsabilidade compartilhada</h3>
+        <p>A equipe precisa de critérios claros para decidir sozinha, inclusive de madrugada. Na liderança, eu assumia e defendia essas decisões depois.</p>
+      </div>
+      <div class="card">
+        <h3>Escuta antes de mudar</h3>
+        <p>Os problemas são mapeados com quem vive a operação, em reuniões 1:1 e reuniões semanais abertas a todos.</p>
+      </div>
+      <div class="card">
+        <h3>Cultura blameless</h3>
+        <p>Incidente é falha do sistema, não da pessoa. A responsabilidade da liderança é redesenhar o processo.</p>
+      </div>
+      <div class="card">
+        <h3>Desenvolver pessoas</h3>
+        <p>Feedback contínuo, planos de carreira e formação de novas lideranças técnicas dentro do próprio time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="container">
+    <h2>Experiência</h2>
+
+    <div class="cargo-item">
+      <h3>Coordenador de Operações</h3>
+      <p class="meta">Softplan · abril de 2023 a abril de 2026</p>
+      <ul>
+        <li>Coordenação de três frentes da operação: monitoramento de infraestrutura, monitoramento de negócio e deploy.</li>
+        <li>Estruturação do processo de Gestão de Mudanças (GMUD), com participação nos comitês de aprovação.</li>
+        <li>Acompanhamento de SLAs, qualidade, custos e prazos, com base nas boas práticas da ITIL.</li>
+        <li>Ponto focal com o cliente: negociação de prazos, reporte de status e relatórios de medição para validação e faturamento.</li>
+        <li>Observabilidade com Zabbix e Grafana, cobrindo disponibilidade técnica e indicadores de negócio.</li>
+        <li>Criação de um protocolo de análise para incidentes noturnos, que deu à equipe autonomia para decidir sem depender do coordenador.</li>
+        <li>Mudança de cultura da equipe: liberação de acesso a ferramentas e licenças de IA, e reuniões semanais abertas para qualquer pessoa apresentar trabalho, problemas ou ideias.</li>
+      </ul>
+    </div>
+
+    <div class="cargo-item">
+      <h3>Líder Técnico (Analista de Infraestrutura III)</h3>
+      <p class="meta">Softplan · janeiro de 2022 a abril de 2023</p>
+      <ul>
+        <li>Liderança técnica do time de atualização, com entregas de ponta a ponta.</li>
+        <li>Implantação de ferramentas e scripts para automatizar o processo de deploy e reduzir trabalho manual.</li>
+        <li>Apoio ao desenvolvimento técnico de profissionais juniores e plenos.</li>
+      </ul>
+    </div>
+
+    <div class="cargo-item">
+      <h3>Analista de Infraestrutura</h3>
+      <p class="meta">Softplan · outubro de 2012 a janeiro de 2022</p>
+      <ul>
+        <li>Atualização de sistemas da unidade de Justiça em ambientes Windows e Linux, para aplicações Delphi e Web.</li>
+        <li>Intervenções em bancos de dados Oracle, DB2 e SQL Server, e controle de versões das aplicações.</li>
+        <li>Monitoramento e relatórios de monitoramento.</li>
+      </ul>
+    </div>
+
+    <div class="cargo-item">
+      <h3>Supervisor de Operações</h3>
+      <p class="meta">Teledata · agosto de 2010 a outubro de 2012</p>
+      <ul>
+        <li>Liderança da equipe de triagem que atendia a Caixa Econômica Federal.</li>
+        <li>Gestão de indicadores de desempenho, relatórios gerenciais e reuniões de análise crítica com o cliente.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="palestras">
+  <div class="container">
+    <h2>Palestras</h2>
+    <div class="fotos-palestra">
+      <img src="images/palestra-kcd-1.jpg" alt="Alexandre apresentando o slide O SPOF Humano no KCD São Paulo 2026">
+      <img src="images/palestra-kcd-2.jpg" alt="Alexandre apresentando o slide Cultura Blameless para o público do KCD São Paulo 2026">
+    </div>
+    <p class="legenda">KCD São Paulo 2026</p>
+    <div class="palestra">
+      <h3>O Alerta Tocou às 3h da Manhã: Liderança, Burnout e a verdadeira Cultura Blameless</h3>
+      <p class="meta">KCD São Paulo 2026 · 26 de setembro de 2026 · Lightning Talk, trilha Career</p>
+      <p>
+        Como um telefone que tocava toda madrugada revelou um gargalo de permissão na equipe, e o que mudou
+        quando a liderança passou a compartilhar responsabilidade. Une a vivência em infraestrutura com
+        psicologia organizacional e a NR-1 (gestão de riscos psicossociais).
+      </p>
+    </div>
+    <div class="palestra">
+      <h3>O Alerta Tocou às 3h da Manhã (edição de 3 anos do Meetup TecGroup)</h3>
+      <p class="meta">Meetup TecGroup · 11 de novembro de 2026 · YouTube</p>
+      <p>
+        Desafios da liderança em ambientes de alta pressão, burnout nas equipes de tecnologia,
+        cultura blameless e como transformar incidentes em aprendizado.
+      </p>
+      <p><a href="https://www.youtube.com/watch?v=O53EuCXazJA" target="_blank" rel="noopener">Assistir no YouTube</a></p>
+    </div>
+    <div class="palestra">
+      <h3>Carreira e Tecnologia: da base à liderança em TI</h3>
+      <p class="meta">Meetup TecGroup · YouTube</p>
+      <p>
+        Bate-papo sobre a trajetória de montar computadores até a coordenação de times de infraestrutura,
+        com dicas sobre aprendizado contínuo, evolução técnica e soft skills.
+      </p>
+      <p><a href="https://www.youtube.com/watch?v=eEnNFA0sk3Q" target="_blank" rel="noopener">Assistir no YouTube</a></p>
+    </div>
+    <blockquote>
+      "Liderança não é resolver tudo. É criar espaço para as pessoas resolverem."
+    </blockquote>
+  </div>
+</section>
+
+<section id="formacao">
+  <div class="container">
+    <h2>Formação</h2>
+    <ul>
+      <li><strong>MBA em Psicologia Organizacional e do Trabalho e Liderança Estratégica</strong> · UnisulVirtual · 2024 a 2025</li>
+      <li><strong>Tecnólogo em Gestão da Tecnologia da Informação</strong> · Universidade Anhembi Morumbi · 2021 a 2023</li>
+      <li><strong>Técnico em Manutenção e Suporte em Informática</strong> · SENAI/SC · 2007 a 2009</li>
+    </ul>
+  </div>
+</section>
+
+<section id="andamento">
+  <div class="container">
+    <h2>Em andamento</h2>
+    <ul class="andamento">
+      <li>Kit do gestor de operações de TI: modelos práticos (1:1, postmortem, registro de mudança, relatório de SLA) e um script de cálculo de SLA.</li>
+      <li>Laboratório de SRE: aplicação com pipeline, monitoramento, SLO, runbook e postmortem.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Alexandre dos Santos · Florianópolis e região
+  </div>
+</footer>
+
+</body>
 </html>
