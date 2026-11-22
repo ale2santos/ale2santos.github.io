@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexandre dos Santos | Operações e Infraestrutura de TI</title>
+<meta name="description" content="Alexandre dos Santos: da bancada de montagem à coordenação de operações de TI. Gestão de incidentes, mudanças, SLA e cultura blameless.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alexandredossantos.com.br/">
+<meta property="og:title" content="Alexandre dos Santos | Operações e Infraestrutura de TI">
+<meta property="og:description" content="Da bancada à coordenação de operações de TI. Gestão de incidentes, mudanças, SLA e desenvolvimento de pessoas.">
+<meta property="og:image" content="https://alexandredossantos.com.br/images/foto-perfil.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --papel: #f4f6f7;
+    --branco: #ffffff;
+    --tinta: #17212b;
+    --grafite: #52606d;
+    --linha: #d9dfe4;
+    --sinal: #1f6f5c;
+    --sinal-claro: #e3efeb;
+    --ambar: #a86a14;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--papel); color: var(--tinta);
+    font: 400 17px/1.65 "IBM Plex Sans", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+  a { color: var(--sinal); text-underline-offset: 3px; }
+  a:focus-visible { outline: 3px solid var(--sinal); outline-offset: 3px; border-radius: 4px; }
+  h1, h2 { font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif; font-weight: 600; letter-spacing: -.01em; }
+  .container { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+  /* Topo */
+  header { background: var(--branco); border-bottom: 1px solid var(--linha); padding: 64px 0 56px; }
+  .topo { display: grid; grid-template-columns: 148px 1fr; gap: 40px; align-items: start; }
+  .foto-perfil { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; display: block; }
+  h1 { font-size: clamp(2.3rem, 5vw, 3.4rem); line-height: 1.05; margin: 4px 0 10px; }
+  .cargo { font-size: 1.15rem; font-weight: 500; color: var(--sinal); margin: 0 0 18px; }
+  .resumo { font-size: 1.08rem; color: var(--grafite); margin: 0 0 26px; max-width: 62ch; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .links a {
+    padding: 8px 16px; border: 1px solid var(--linha); border-radius: 6px; background: var(--branco);
+    color: var(--tinta); text-decoration: none; font-weight: 500; font-size: .95rem;
+  }
+  .links a:hover { border-color: var(--tinta); }
+  .links a.agendar { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+  .links a.agendar:hover { background: var(--sinal); border-color: var(--sinal); }
+
+  /* Seções: título à esquerda, conteúdo à direita */
+  section { padding: 64px 0; border-bottom: 1px solid var(--linha); }
+  .secao { display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
+  .secao > h2 { font-size: 1.55rem; line-height: 1.2; margin: 0; padding-top: 14px; border-top: 3px solid var(--tinta); align-self: start; }
+  .secao > h2 { position: sticky; top: 24px; }
+  .corpo { max-width: 720px; min-width: 0; }
+  h3 { font-size: 1.08rem; font-weight: 600; margin: 0 0 4px; }
+  .meta { color: var(--grafite); font-size: .95rem; margin: 0 0 12px; }
+  ul, ol { padding-left: 20px; margin: 0; }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--grafite); }
+
+  /* Trajetória como faixa de disponibilidade */
+  .faixa { display: flex; gap: 3px; height: 34px; margin: 6px 0 22px; }
+  .faixa span { border-radius: 3px; transform-origin: left; animation: crescer .7s ease-out both; }
+  .faixa span:nth-child(1) { flex: 1; background: #b9d6cc; }
+  .faixa span:nth-child(2) { flex: 2; background: #8cbcab; animation-delay: .08s; }
+  .faixa span:nth-child(3) { flex: 10; background: #4f9a82; animation-delay: .16s; }
+  .faixa span:nth-child(4) { flex: 1; background: #2f7f67; animation-delay: .24s; }
+  .faixa span:nth-child(5) { flex: 3; background: var(--sinal); animation-delay: .32s; }
+  @keyframes crescer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .trilha { list-style: none; padding: 0; margin: 0; }
+  .trilha li { display: grid; grid-template-columns: 14px 120px 1fr; gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--linha); margin: 0; }
+  .trilha li::before { content: ""; width: 12px; height: 12px; border-radius: 2px; background: var(--c); transform: translateY(1px); }
+  .trilha .ano { color: var(--grafite); font-size: .95rem; order: -1; grid-column: 2; grid-row: 1; }
+  .trilha .papel { grid-column: 3; grid-row: 1; }
+
+  /* Liderança */
+  .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px 32px; }
+  .card h3 { margin-bottom: 6px; }
+  .card p { margin: 0; color: var(--grafite); }
+  #lideranca .card { border-top: 2px solid var(--sinal); padding-top: 14px; }
+
+  .cargo-item { padding-bottom: 28px; margin-bottom: 28px; border-bottom: 1px solid var(--linha); }
+  .cargo-item:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+
+  /* Recomendações */
+  .grupo { font-size: 1rem; font-weight: 500; color: var(--grafite); margin: 32px 0 16px; }
+  .grupo:first-child { margin-top: 0; }
+  .depos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .depo { background: var(--branco); border: 1px solid var(--linha); border-radius: 8px; padding: 22px 24px; margin: 0; }
+  .depo p { margin: 0 0 14px; font-size: 1.02rem; }
+  .depo .autor { margin: 0; font-size: .92rem; color: var(--grafite); }
+  .depo .autor strong { display: block; color: var(--tinta); font-weight: 600; }
+  .ver-mais { margin-top: 22px; }
+
+  /* Palestras */
+  .fotos-palestra { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 8px; }
+  .fotos-palestra img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; display: block; }
+  .legenda { color: var(--grafite); font-size: .9rem; margin: 0 0 32px; }
+  .palestra { margin-bottom: 30px; }
+  .palestra p { margin: 0 0 8px; }
+  blockquote {
+    margin: 36px 0 0; padding: 0 0 0 22px; border-left: 3px solid var(--sinal);
+    font-size: 1.3rem; line-height: 1.45; font-style: italic; color: var(--tinta); max-width: 34ch;
+  }
+
+  .subtitulo { margin: 30px 0 12px; }
+  .andamento li { color: var(--grafite); }
+  .andamento li strong { color: var(--tinta); }
+
+  /* Roteiro 2027 */
+  .roteiro { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--ambar); }
+  .roteiro .card { padding: 16px 16px 4px 0; position: relative; }
+  .roteiro .card::before { content: ""; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--papel); border: 2px solid var(--ambar); }
+  .roteiro .card h3 { color: var(--ambar); margin: 6px 0 8px; }
+  .roteiro .card ul { padding-left: 16px; color: var(--grafite); font-size: .95rem; }
+  .roteiro .card li { margin-bottom: 6px; }
+  .nota { color: var(--grafite); font-size: .95rem; margin-top: 18px; }
+
+  /* Mentoria */
+  #mentoria .grade { margin: 24px 0 8px; gap: 16px; }
+  #mentoria .card { background: var(--branco); border: 1px solid var(--linha); border-radius: 8px; padding: 20px 22px; }
+  #mentoria .card ul { color: var(--grafite); }
+  #mentoria .card.fora { background: transparent; }
+  #mentoria .links { margin-top: 24px; }
+
+  footer { padding: 36px 0; color: var(--grafite); font-size: .9rem; }
+
+  @media (max-width: 860px) {
+    .secao { grid-template-columns: 1fr; gap: 22px; }
+    .secao > h2 { border-top-width: 2px; position: static; }
+    .roteiro { grid-template-columns: 1fr 1fr; row-gap: 22px; }
+  }
+  @media (max-width: 600px) {
+    header { padding: 40px 0 36px; }
+    .topo { grid-template-columns: 1fr; gap: 20px; }
+    .foto-perfil { width: 108px; height: 108px; }
+    section { padding: 44px 0; }
+    .fotos-palestra { grid-template-columns: 1fr; }
+    .trilha li { grid-template-columns: 14px 1fr; row-gap: 0; }
+    .trilha .ano { grid-column: 2; grid-row: 2; }
+    .trilha .papel { grid-column: 2; grid-row: 1; }
+    .roteiro { grid-template-columns: 1fr; border-top: 0; border-left: 2px solid var(--ambar); }
+    .roteiro .card { padding: 0 0 18px 20px; }
+    .roteiro .card::before { top: 4px; left: -7px; }
+    .depos { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .faixa span { animation: none; }
+  }
+
+  /* Contato */
+  .form-contato { display: grid; gap: 14px; max-width: 560px; }
+  .form-contato label { display: grid; gap: 6px; font-weight: 500; font-size: .95rem; }
+  .form-contato input, .form-contato textarea {
+    font: inherit; padding: 10px 12px; border: 1px solid var(--linha); border-radius: 6px; background: var(--branco); color: var(--tinta);
+  }
+  .form-contato input:focus-visible, .form-contato textarea:focus-visible { outline: 3px solid var(--sinal); outline-offset: 1px; border-color: var(--sinal); }
+  .form-contato textarea { min-height: 140px; resize: vertical; }
+  .form-contato button {
+    justify-self: start; font: inherit; font-weight: 500; padding: 10px 18px; border-radius: 6px; cursor: pointer;
+    background: var(--tinta); color: #fff; border: 1px solid var(--tinta);
+  }
+  .form-contato button:hover { background: var(--sinal); border-color: var(--sinal); }
+  .form-contato button:disabled { opacity: .6; cursor: wait; }
+  .aviso-form { margin: 0; font-size: .95rem; }
+  .aviso-form.ok { color: var(--sinal); }
+  .aviso-form.erro { color: #a3261c; }
+  .oculto { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container topo">
+    <img class="foto-perfil" src="images/foto-perfil.jpg" alt="Foto de Alexandre dos Santos">
+    <div>
+      <h1>Alexandre dos Santos</h1>
+    <p class="cargo">Operações e infraestrutura de TI, gestão de equipes</p>
+    <p class="resumo">
+      Comecei na bancada, montando e testando computadores, e cheguei à coordenação de operações de TI.
+      Hoje busco unir operação estável, gestão de incidentes e mudanças, e times com autonomia para decidir.
+    </p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/santosale" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/ale2santos" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.instagram.com/ale2_santos" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:alexandres2santo@gmail.com">E-mail</a>
+      <a href="#mentoria">Mentoria</a>
+    </div>
+    </div>
+  </div>
+</header>
+
+
+<section id="trajetoria">
+  <div class="container secao">
+    <h2>Trajetória</h2>
+    <div class="corpo">
+    <div class="faixa" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+    <ul class="trilha">
+      <li style="--c:#b9d6cc"><span class="papel"><strong>Técnico em Informática</strong>, MemoryShop</span><span class="ano">2009 a 2010</span></li>
+      <li style="--c:#8cbcab"><span class="papel"><strong>Supervisor de Operações</strong>, Teledata</span><span class="ano">2010 a 2012</span></li>
+      <li style="--c:#4f9a82"><span class="papel"><strong>Analista de Infraestrutura</strong>, Softplan</span><span class="ano">2012 a 2022</span></li>
+      <li style="--c:#2f7f67"><span class="papel"><strong>Líder Técnico</strong>, Softplan</span><span class="ano">2022 a 2023</span></li>
+      <li style="--c:#1f6f5c"><span class="papel"><strong>Coordenador de Operações</strong>, Softplan</span><span class="ano">2023 a 2026</span></li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<section id="lideranca">
+  <div class="container secao">
+    <h2>Minha forma de liderar</h2>
+    <div class="corpo">
+    <div class="grade">
+      <div class="card">
+        <h3>Autonomia com responsabilidade compartilhada</h3>
+        <p>A equipe precisa de critérios claros para decidir sozinha, inclusive de madrugada. Na liderança, eu assumia e defendia essas decisões depois.</p>
+      </div>
+      <div class="card">
+        <h3>Escuta antes de mudar</h3>
+        <p>Os problemas são mapeados com quem vive a operação, em reuniões 1:1 e reuniões semanais abertas a todos.</p>
+      </div>
+      <div class="card">
+        <h3>Cultura blameless</h3>
+        <p>Incidente é falha do sistema, não da pessoa. A responsabilidade da liderança é redesenhar o processo.</p>
+      </div>
+      <div class="card">
+        <h3>Desenvolver pessoas</h3>
+        <p>Feedback contínuo, planos de carreira e formação de novas lideranças técnicas dentro do próprio time.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="container secao">
+    <h2>Experiência</h2>
+    <div class="corpo">
+
+    <div class="cargo-item">
+      <h3>Coordenador de Operações</h3>
+      <p class="meta">Softplan, abril de 2023 a abril de 2026</p>
+      <ul>
+        <li>Coordenação de três frentes da operação: monitoramento de infraestrutura, monitoramento de negócio e deploy.</li>
+        <li>Estruturação do processo de Gestão de Mudanças (GMUD), com participação nos comitês de aprovação.</li>
+        <li>Acompanhamento de SLAs, qualidade, custos e prazos, com base nas boas práticas da ITIL.</li>
+        <li>Ponto focal com o cliente: negociação de prazos, reporte de status e relatórios de medição para validação e faturamento.</li>
+        <li>Observabilidade com Zabbix e Grafana, cobrindo disponibilidade técnica e indicadores de negócio.</li>
+        <li>Criação de um protocolo de análise para incidentes noturnos, que deu à equipe autonomia para decidir sem depender do coordenador.</li>
+        <li>Mudança de cultura da equipe: liberação de acesso a ferramentas e licenças de IA, e reuniões semanais abertas para qualquer pessoa apresentar trabalho, problemas ou ideias.</li>
+      </ul>
+    </div>
+
+    <div class="cargo-item">
+      <h3>Líder Técnico (Analista de Infraestrutura III)</h3>
+      <p class="meta">Softplan, janeiro de 2022 a abril de 2023</p>
+      <ul>
+        <li>Liderança técnica do time de atualização, com entregas de ponta a ponta.</li>
+        <li>Implantação de ferramentas e scripts para automatizar o processo de deploy e reduzir trabalho manual.</li>
+        <li>Apoio ao desenvolvimento técnico de profissionais juniores e plenos.</li>
+      </ul>
+    </div>
+
+    <div class="cargo-item">
+      <h3>Analista de Infraestrutura</h3>
+      <p class="meta">Softplan, outubro de 2012 a janeiro de 2022</p>
+      <ul>
+        <li>Atualização de sistemas da unidade de Justiça em ambientes Windows e Linux, para aplicações Delphi e Web.</li>
+        <li>Intervenções em bancos de dados Oracle, DB2 e SQL Server, e controle de versões das aplicações.</li>
+        <li>Monitoramento e relatórios de monitoramento.</li>
+      </ul>
+    </div>
+
+    <div class="cargo-item">
+      <h3>Supervisor de Operações</h3>
+      <p class="meta">Teledata, agosto de 2010 a outubro de 2012</p>
+      <ul>
+        <li>Liderança da equipe de triagem que atendia a Caixa Econômica Federal.</li>
+        <li>Gestão de indicadores de desempenho, relatórios gerenciais e reuniões de análise crítica com o cliente.</li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="recomendacoes">
+  <div class="container secao">
+    <h2>Quem trabalhou comigo conta</h2>
+    <div class="corpo">
+    <h3 class="grupo">Liderados e mentorados</h3>
+    <div class="depos">
+    <div class="depo">
+      <p>"Ele criou um ambiente onde a gente se sentia confortável para inovar, testar e evoluir constantemente."</p>
+      <p class="autor"><strong>Erickson Queiroz</strong>Analista de Aplicação e Infraestrutura</p>
+    </div>
+    <div class="depo">
+      <p>"Até eu ter o conhecimento e a segurança de realizar as tarefas sozinho, ele sempre me ensinou e apoiou com paciência e dedicação."</p>
+      <p class="autor"><strong>Dario da Costa Pinheiro</strong>Líder Técnico</p>
+    </div>
+    <div class="depo">
+      <p>"Ele é o tipo de gestor que genuinamente acredita no potencial do seu time."</p>
+      <p class="autor"><strong>Daniel Castro</strong>Platform Engineer e SRE</p>
+    </div>
+    <div class="depo">
+      <p>"Ele tirou minhas dúvidas, compartilhou experiências reais e me ajudou a traçar um plano de estudos eficiente para adequação ao mercado."</p>
+      <p class="autor"><strong>Reinaldo dos Santos Junior</strong>Mentoria em transição de carreira</p>
+    </div>
+    </div>
+    <h3 class="grupo">Líderes e colegas de outras áreas</h3>
+    <div class="depos">
+    <div class="depo">
+      <p>"Seu compromisso com o desenvolvimento da equipe e sua presença ativa em todas as etapas fazem dele um líder admirável."</p>
+      <p class="autor"><strong>Laura Cristina Züge</strong>Coordenadora de Operações</p>
+    </div>
+    <div class="depo">
+      <p>"É um líder que inspira confiança, incentiva novas ideias, valoriza talentos individuais e potencializa o melhor de cada profissional ao seu redor."</p>
+      <p class="autor"><strong>Cleiton Borges</strong>Coordenador de Operações e Tech Lead</p>
+    </div>
+    <div class="depo">
+      <p>"Admiro sua capacidade de manter a empatia e o respeito, especialmente em cenários de alta pressão."</p>
+      <p class="autor"><strong>Lucas Liachi</strong>Especialista em Governança e Agilidade</p>
+    </div>
+    <div class="depo">
+      <p>"Uma coisa sempre ficou muito clara: é um profissional em quem você pode confiar."</p>
+      <p class="autor"><strong>Eduardo Bertolucci</strong>Especialista em Tecnologia e Consultor de Sistemas</p>
+    </div>
+    </div>
+    <p class="ver-mais"><a href="https://www.linkedin.com/in/santosale/details/recommendations/" target="_blank" rel="noopener">Ver todas as recomendações no LinkedIn</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="palestras">
+  <div class="container secao">
+    <h2>Palestras</h2>
+    <div class="corpo">
+    <div class="fotos-palestra">
+      <img src="images/palestra-kcd-capa.jpg" alt="Alexandre palestrando sobre Cultura Blameless no KCD São Paulo 2026">
+      <img src="images/palestra-kcd-2.jpg" alt="Alexandre apresentando para o público do KCD São Paulo 2026">
+    </div>
+    <p class="legenda">KCD São Paulo 2026</p>
+    <div class="palestra">
+      <h3>O Alerta Tocou às 3h da Manhã: Liderança, Burnout e a verdadeira Cultura Blameless</h3>
+      <p class="meta">KCD São Paulo 2026, 26 de setembro de 2026, Lightning Talk, trilha Career</p>
+      <p>
+        Como um telefone que tocava toda madrugada revelou um gargalo de permissão na equipe, e o que mudou
+        quando a liderança passou a compartilhar responsabilidade. Une a vivência em infraestrutura com
+        psicologia organizacional e a NR-1 (gestão de riscos psicossociais).
+      </p>
+    </div>
+    <div class="palestra">
+      <h3>O Alerta Tocou às 3h da Manhã (edição de 3 anos do Meetup TecGroup)</h3>
+      <p class="meta">Meetup TecGroup, 11 de novembro de 2026, YouTube</p>
+      <p>
+        Desafios da liderança em ambientes de alta pressão, burnout nas equipes de tecnologia,
+        cultura blameless e como transformar incidentes em aprendizado.
+      </p>
+      <p><a href="https://www.youtube.com/watch?v=O53EuCXazJA" target="_blank" rel="noopener">Assistir no YouTube</a></p>
+    </div>
+    <div class="palestra">
+      <h3>Carreira e Tecnologia: da base à liderança em TI</h3>
+      <p class="meta">Meetup TecGroup, YouTube</p>
+      <p>
+        Bate-papo sobre a trajetória de montar computadores até a coordenação de times de infraestrutura,
+        com dicas sobre aprendizado contínuo, evolução técnica e soft skills.
+      </p>
+      <p><a href="https://www.youtube.com/watch?v=eEnNFA0sk3Q" target="_blank" rel="noopener">Assistir no YouTube</a></p>
+    </div>
+    <blockquote>
+      "Liderança não é resolver tudo. É criar espaço para as pessoas resolverem."
+    </blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="formacao">
+  <div class="container secao">
+    <h2>Formação</h2>
+    <div class="corpo">
+    <ul>
+      <li><strong>MBA em Psicologia Organizacional e do Trabalho e Liderança Estratégica</strong>, Unisul, 2024 a 2025</li>
+      <li><strong>Tecnólogo em Gestão da Tecnologia da Informação</strong>, Universidade Anhembi Morumbi, 2021 a 2023</li>
+      <li><strong>Técnico em Manutenção e Suporte em Informática</strong>, SENAI/SC, 2007 a 2009</li>
+    </ul>
+    <h3 class="subtitulo">Cursos livres</h3>
+    <ul>
+      <li>Formação DevOps Essentials, 4Linux</li>
+      <li>Linux SysAdmin &amp; Security, 4Linux</li>
+      <li>Linux Servers, Domain Controller, 4Linux</li>
+      <li>Linux Beginners in Cloud, 4Linux</li>
+      <li>Trilha SRE e Observabilidade, TDC</li>
+      <li>IA na Prática, SENAI</li>
+      <li>Extensão em Neurociências Aplicada à Educação, Ciências da Vida na Escola</li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<section id="andamento">
+  <div class="container secao">
+    <h2>Projetos em andamento</h2>
+    <div class="corpo">
+    <ul class="andamento">
+      <li><strong>Portfólio</strong> (esta página): publicado no GitHub Pages e atualizado aos poucos.</li>
+      <li><strong>Mentoria às quartas:</strong> conversas gratuitas sobre carreira, TI e liderança.</li>
+      <li><strong>Estudo para a ITIL Foundation (Version 5).</strong></li>
+    </ul>
+    <h3 class="subtitulo">Próximos (backlog)</h3>
+    <ul class="andamento">
+      <li>Kit do gestor de operações de TI: modelos práticos (1:1, postmortem, registro de mudança, relatório de SLA) e um script de cálculo de SLA.</li>
+      <li>Laboratório de SRE: aplicação com pipeline, monitoramento, SLO, runbook e postmortem.</li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<section id="roteiro">
+  <div class="container secao">
+    <h2>Roteiro 2027</h2>
+    <div class="corpo">
+    <div class="roteiro">
+      <div class="card">
+        <h3>1º trimestre</h3>
+        <ul>
+          <li>Certificação ITIL Foundation (Version 5)</li>
+          <li>Mentorias gratuitas e coleta de depoimentos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2º trimestre</h3>
+        <ul>
+          <li>AWS Certified Cloud Practitioner</li>
+          <li>Kit do gestor de operações publicado no GitHub</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>3º trimestre</h3>
+        <ul>
+          <li>HashiCorp Terraform Associate</li>
+          <li>KCNA (Kubernetes)</li>
+          <li>Laboratório de SRE publicado no GitHub</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>4º trimestre</h3>
+        <ul>
+          <li>CKA (Kubernetes)</li>
+          <li>Novas propostas de palestra em eventos de tecnologia</li>
+        </ul>
+      </div>
+    </div>
+    <p class="nota">Durante todo o ano: estudo de inglês, palestras em comunidades e voluntariado. É um plano: as datas podem mudar conforme as oportunidades.</p>
+    </div>
+  </div>
+</section>
+
+<section id="voluntariado">
+  <div class="container secao">
+    <h2>Voluntariado</h2>
+    <div class="corpo">
+    <ul class="andamento">
+      <li><strong>Defesa Civil:</strong> voluntário, com capacitação de voluntários em novembro de 2026.</li>
+      <li><strong>Aulas de informática:</strong> quero dar aulas como voluntário em uma instituição social. Se você conhece uma instituição que precise, me chama.</li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<section id="mentoria">
+  <div class="container secao">
+    <h2>Mentoria às quartas</h2>
+    <div class="corpo">
+    <p>Toda quarta-feira à noite eu abro horários para conversas de 45 minutos, por Google Meet. Por enquanto é gratuito. Leia as regras abaixo antes de marcar: elas ajudam a gente a aproveitar bem o tempo.</p>
+
+    <div class="grade">
+      <div class="card">
+        <h3>Podemos conversar sobre</h3>
+        <ul>
+          <li>Começar em TI ou migrar de área</li>
+          <li>Carreira em suporte, infraestrutura e operações</li>
+          <li>Monitoramento, incidentes, plantão e gestão de mudanças</li>
+          <li>Primeira liderança: 1:1, feedback, organização do time</li>
+          <li>Cultura blameless e prevenção de burnout no time</li>
+          <li>Currículo, LinkedIn e preparação para entrevistas</li>
+          <li>Como montar e apresentar sua primeira palestra</li>
+          <li>Caminho de estudos e certificações (o que estou trilhando também)</li>
+        </ul>
+      </div>
+      <div class="card fora">
+        <h3>Fica de fora</h3>
+        <ul>
+          <li>Programação e desenvolvimento de software</li>
+          <li>Kubernetes e nuvem em nível avançado (ainda estou estudando)</li>
+          <li>Segurança ofensiva e pentest</li>
+          <li>Ciência de dados e IA em profundidade</li>
+          <li>Questões jurídicas, trabalhistas ou financeiras</li>
+          <li>Terapia ou acompanhamento psicológico</li>
+          <li>Indicação garantida para vagas</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="subtitulo">Regras</h3>
+    <ol class="andamento">
+      <li>Marque com pelo menos <strong>3 dias de antecedência</strong>.</li>
+      <li>Ao marcar, escreva em uma ou duas frases <strong>o que quer conversar</strong>. Sem isso, posso cancelar o horário.</li>
+      <li>Se o assunto estiver na lista "fica de fora", eu aviso e cancelo antes, para você não perder tempo.</li>
+      <li>A conversa dura <strong>45 minutos</strong>. Tolerância de <strong>10 minutos</strong> de atraso; depois disso o horário é cancelado.</li>
+      <li>Não pode ir? Cancele pelo convite com pelo menos <strong>24 horas</strong> de antecedência, para liberar a vaga.</li>
+      <li><strong>Uma conversa por pessoa a cada 30 dias</strong>, para dar espaço a mais gente.</li>
+      <li>Não gravo a conversa. Câmera é opcional.</li>
+    </ol>
+
+    <div class="links"><a class="agendar" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1ZeJGSFFk-KOE0UkChHrOO2JXzz26yu0qhc0UKugidFkDoZ_tRhTZSrGatvT0iAMGbZDpboMKP" target="_blank" rel="noopener">Li as regras, quero agendar</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="container secao">
+    <h2>Contato</h2>
+    <div class="corpo">
+      <p>Quer falar sobre uma vaga, um projeto ou uma palestra? Mande uma mensagem que eu respondo por e-mail. Para mentoria, use o agendamento acima.</p>
+      <form class="form-contato" id="form-contato" action="https://formspree.io/f/xnpdbpjl" method="POST">
+        <label>Nome
+          <input type="text" name="nome" autocomplete="name" required>
+        </label>
+        <label>E-mail
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Mensagem
+          <textarea name="mensagem" required></textarea>
+        </label>
+        <input type="text" name="_gotcha" class="oculto" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_subject" value="Mensagem pelo portfólio">
+        <button type="submit">Enviar mensagem</button>
+        <p class="aviso-form" id="aviso-form" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById('form-contato');
+    var aviso = document.getElementById('aviso-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var botao = form.querySelector('button');
+      botao.disabled = true;
+      aviso.className = 'aviso-form';
+      aviso.textContent = 'Enviando...';
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+        .then(function (r) {
+          if (!r.ok) throw new Error();
+          form.reset();
+          aviso.className = 'aviso-form ok';
+          aviso.textContent = 'Mensagem enviada. Obrigado! Eu respondo por e-mail.';
+        })
+        .catch(function () {
+          aviso.className = 'aviso-form erro';
+          aviso.textContent = 'Não foi possível enviar. Tente de novo ou escreva para alexandres2santo@gmail.com.';
+        })
+        .finally(function () { botao.disabled = false; });
+    });
+  })();
+</script>
+
+<footer>
+  <div class="container">
+    Alexandre dos Santos, Florianópolis e região
+  </div>
+</footer>
+
+</body>
+</html>
